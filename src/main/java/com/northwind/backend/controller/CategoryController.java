@@ -3,6 +3,7 @@ package com.northwind.backend.controller;
 import com.northwind.backend.dto.OrderDto;
 import com.northwind.backend.service.CategoryService;
 import com.northwind.backend.service.OrderService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
 
+@Tag(name = "Java Bootcamp", description = "Category Service API")
 @RestController
 @RequestMapping("/api/category")
 @RequiredArgsConstructor
