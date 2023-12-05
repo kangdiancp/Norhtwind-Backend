@@ -1,4 +1,4 @@
-package com.northwind.backend.advice;
+package com.northwind.backend.exception;
 
 
 import com.northwind.backend.exception.TokenRefreshException;
