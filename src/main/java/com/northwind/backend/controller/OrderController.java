@@ -30,7 +30,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
     public ResponseEntity<?> findAllOrder(){
         log.debug("Get all order resources");
         var ordersDto= orderService.findAllOrder();

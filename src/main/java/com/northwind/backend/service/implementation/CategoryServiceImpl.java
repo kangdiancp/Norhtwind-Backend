@@ -35,6 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> categoryEntity = Optional.ofNullable(repository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("CategoryId not found")
         ));
+
         CategoryDto categoryDto = CategoryServiceImpl.mapToDto(categoryEntity.get());
         return Optional.of(categoryDto);
     }

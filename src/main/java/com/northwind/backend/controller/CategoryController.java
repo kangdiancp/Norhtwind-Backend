@@ -17,6 +17,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Tag(name = "Java Bootcamp", description = "Category Service API")
@@ -27,17 +28,17 @@ import java.util.concurrent.CompletableFuture;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    /*@GetMapping
+    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
+    @GetMapping("/async")
     @Async
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public CompletableFuture<ResponseEntity<?>> findAllOrder(){
+    public CompletableFuture<ResponseEntity<?>> findAllOrderAsync(){
         log.debug("Get all category resources");
         var categoriesDto= categoryService.findAllCategory();
         return CompletableFuture.completedFuture(new ResponseEntity<>(categoriesDto, HttpStatus.OK));
-    }*/
+    }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
+    //@PreAuthorize("hasRole('ADMIN') or hasRole('FA')")
     public ResponseEntity<?> findAllOrder(){
         log.debug("Get all category resources");
 
@@ -55,9 +56,9 @@ public class CategoryController {
         }
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
-    public ResponseEntity<?> createCategory(@RequestBody CategoryDto categoryDto){
+    @PostMapping("/create")
+    //@PreAuthorize("hasRole('ADMIN')  or hasRole('FA')")
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto){
         try{
             Category category = Category.builder()
                     .categoryId(categoryDto.getCategoryId())
@@ -73,12 +74,12 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
-    public ResponseEntity<?> findTutorialById(@PathVariable("id")Long categoryId){
-        CategoryDto categoryDto = categoryService.findById(categoryId).orElseThrow(()->
+    //@PreAuthorize("hasRole('ADMIN') or hasRole('FA')")
+    public ResponseEntity<?> findCategoryById(@PathVariable("id")Long categoryId){
+        CategoryDto category = categoryService.findById(categoryId).orElseThrow(()->
             new ResourceNotFoundException("CategoryId not found")
         );
-        return new ResponseEntity<>(categoryDto,HttpStatus.OK);
+        return new ResponseEntity<>(category,HttpStatus.OK);
     }
 
 
