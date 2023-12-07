@@ -75,7 +75,7 @@ public class WebSecurityConfig {
         .authorizeHttpRequests(auth -> 
           auth.requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
-                  .requestMatchers("/api/**").permitAll()
+                  //.requestMatchers("/api/**").permitAll()
                   .requestMatchers(SWAGGER_PATHS).permitAll()
               .anyRequest().authenticated()
         );

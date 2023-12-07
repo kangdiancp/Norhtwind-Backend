@@ -5,6 +5,8 @@ import com.northwind.backend.entities.Category;
 import com.northwind.backend.exception.ResourceNotFoundException;
 import com.northwind.backend.repository.CategoryRepository;
 import com.northwind.backend.service.CategoryService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository repository;
 
@@ -55,17 +57,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public int deleteCategory(Long id) {
+    public void deleteCategory(Long id) {
         Optional<Category> category = repository.findById(id);
         if (category.isPresent()){
-            return repository.deleteCategoryById(id);
+            repository.deleteCategoryById(id);
         }
-        return 0;
     }
 
     @Override
-    public List<CategoryDto> findCategoryByName(String name) {
-        return null;
+    public List<CategoryDto> findByDescriptionContaining(String name) {
+        return repository.findByDescriptionContaining(name)
+                .stream()
+                .map(CategoryServiceImpl::mapToDto)
+                .collect(Collectors.toList());
     }
 
     @Override

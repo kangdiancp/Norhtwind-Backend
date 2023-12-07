@@ -18,9 +18,9 @@ public interface CategoryService extends BaseService{
 
     Optional<CategoryDto> updateCategory(Long id, Category category);
 
-    int deleteCategory(Long id);
+    void deleteCategory(Long id);
 
-    List<CategoryDto> findCategoryByName(String name);
+    List<CategoryDto> findByDescriptionContaining(String name);
 
 
 

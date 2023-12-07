@@ -30,7 +30,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('FA')")
     public ResponseEntity<?> findAllOrder(){
         log.debug("Get all order resources");
         var ordersDto= orderService.findAllOrder();
@@ -44,7 +44,7 @@ public class OrderController {
     }*/
 
     @GetMapping("/{orderId}/details")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('FA')")
     @Async
     public CompletableFuture<ResponseEntity<?>> findAllOrderDetail(@PathVariable("orderId") Long orderId){
         log.debug("Get orderDetail resources");
