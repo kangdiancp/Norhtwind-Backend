@@ -2,9 +2,6 @@ package com.northwind.backend;
 
 
 import com.northwind.backend.controller.OrderController;
-import com.northwind.backend.controller.TestController;
-import com.northwind.backend.repository.CategoryRepository;
-import com.northwind.backend.repository.OrderRepository;
 import com.northwind.backend.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
