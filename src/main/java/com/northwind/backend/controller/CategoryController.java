@@ -32,6 +32,7 @@ import java.util.concurrent.CompletableFuture;
 public class CategoryController {
     private final CategoryService categoryService;
 
+    //gunakan @Async & CompletableFuture pada sebuah method agar bisa diperlakukan Asyncronoush
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FA')")
     @GetMapping("/async")
     @Async

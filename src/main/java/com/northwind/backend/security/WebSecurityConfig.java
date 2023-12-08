@@ -22,9 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 //@EnableWebSecurity
 @EnableMethodSecurity
-//(securedEnabled = true,
-//jsr250Enabled = true,
-//prePostEnabled = true) // by default
 public class WebSecurityConfig {
   
 
@@ -35,7 +32,7 @@ public class WebSecurityConfig {
   @Autowired
   private AuthEntryPointJwt unauthorizedHandler;
 
-  private static final String[] SWAGGER_PATHS = {"/api-docs/**", "/swagger-ui/**"};
+
 
   @Bean
   public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -65,7 +62,7 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-
+  private static final String[] SWAGGER_PATHS = {"/api-docs/**", "/swagger-ui/**"};
   
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -74,7 +71,6 @@ public class WebSecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> 
           auth.requestMatchers("/api/auth/**").permitAll()
-              .requestMatchers("/api/test/**").permitAll()
                   //.requestMatchers("/api/**").permitAll()
                   .requestMatchers(SWAGGER_PATHS).permitAll()
               .anyRequest().authenticated()
